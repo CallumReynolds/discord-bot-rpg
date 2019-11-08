@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RpgApi.Models;
+using RpgApi.Services;
 
 namespace RpgApi
 {
@@ -27,12 +28,14 @@ namespace RpgApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<RPGDDatabaseSettings>(
-                Configuration.GetSection(nameof(RPGDDatabaseSettings)));
+            services.Configure<RPGDatabaseSettings>(
+                Configuration.GetSection(nameof(RPGDatabaseSettings)));
             
 
             services.AddSingleton<IRPGDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<RPGDatabaseSettings>>().Value);
+
+            services.AddSingleton<RPGService>();
 
             services.AddControllers();
         }
