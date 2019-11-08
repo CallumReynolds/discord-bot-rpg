@@ -16,6 +16,7 @@ namespace RpgApi.Controllers
             _rpgService = rpgService;
         }
 
+
         [HttpGet]
         public ActionResult<List<User>> Get() =>
             _rpgService.Get();
