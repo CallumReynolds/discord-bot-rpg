@@ -68,6 +68,11 @@ public class Program
             messageParam.Channel.SendMessageAsync("What. A. Cutay hehe");
         }
 
+        if (messageParam.Author.ToString() == "KrakenMacc#9653")
+        {
+            messageParam.Channel.SendMessageAsync("okay");
+        }
+
         return Task.CompletedTask;
     }
 
