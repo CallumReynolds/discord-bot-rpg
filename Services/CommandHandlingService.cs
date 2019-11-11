@@ -50,6 +50,11 @@ namespace DiscordBot.Services
             if (!message.HasCharPrefix('!', ref argPos)) return;
 
             var context = new SocketCommandContext(_discord, message);
+
+            if (message.Author.ToString() == "Gheydragon#9467" || message.Author.ToString() == "Gheykaiser#1328")
+            {
+                await context.Channel.SendMessageAsync("Bailey gay");
+            }
             // Perform the execution of the command. In this method,
             // the command service will perform precondition and parsing check
             // then execute the command if one is matched.
@@ -59,6 +64,8 @@ namespace DiscordBot.Services
             if (result.Error.HasValue && 
                 result.Error.Value != CommandError.UnknownCommand)
                 await context.Channel.SendMessageAsync(result.ToString());
+
+            Console.WriteLine("LOOK HERE -->" + message.Author);
         }
 
         public async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)

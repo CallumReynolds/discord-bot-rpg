@@ -26,6 +26,8 @@ public class Program
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
+                client.MessageReceived += YeetAsync;
+
                 // Tokens should be considered secret data and never hard-coded.
                 // We can read from the environment variable to avoid hardcoding.
                 await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("token"));
@@ -34,13 +36,44 @@ public class Program
                 // Here we initialize the logic required to register our commands.
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
+                Console.WriteLine("yeet");
+
                 await Task.Delay(-1);
             }
     }
 
+    private Task YeetAsync(SocketMessage messageParam)
+    {
+        
+        Console.WriteLine(messageParam.Author);
+        Console.WriteLine(messageParam.Channel);
+
+        if (messageParam.Author.ToString() == "Gheydragon#9467")
+        {
+            messageParam.Channel.SendMessageAsync("ok boomer");
+        }
+
+        if (messageParam.Author.ToString() == "Gheyface#6401")
+        {
+            messageParam.Channel.SendMessageAsync("Whatever Jordan...");
+        }
+
+        if (messageParam.Author.ToString() == "Gheykaiser#1328")
+        {
+            messageParam.Channel.SendMessageAsync("Cool story Bailey, needs more dragons!");
+        }
+        
+        if (messageParam.Author.ToString() == "Traenacha#3393")
+        {
+            messageParam.Channel.SendMessageAsync("What. A. Cutay hehe");
+        }
+
+        return Task.CompletedTask;
+    }
+
     private Task LogAsync(LogMessage log)
     {
-        Console.WriteLine(log.ToString());
+        Console.WriteLine(log.ToString() + " yeet");
 
         return Task.CompletedTask;
     }
@@ -118,6 +151,9 @@ public class CommandHandler
     {
         // Don't process the command if it was a system message
         var message = messageParam as SocketUserMessage;
+        // Create a WebSocket-based command context based on the message
+        var context = new SocketCommandContext(_client, message);
+
         if (message == null) return;
 
         // Create a number to track where the prefix ends and the command begins
@@ -129,8 +165,7 @@ public class CommandHandler
             message.Author.IsBot)
             return;
 
-        // Create a WebSocket-based command context based on the message
-        var context = new SocketCommandContext(_client, message);
+        
 
         // Execute the command with the command context we just
         // created, along with the service provider for precondition checks.

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System;
 using System.IO;
 using DiscordBot.Services;
+using System.Net.Http;
 
 // Keep in mind your module **must** be public and inherit ModuleBase.
 // If it isn't, it will not be discovered by AddModulesAsync!
@@ -30,6 +31,26 @@ namespace DiscordBot.Modules
             await Context.Channel.SendFileAsync(stream, "cat.png");
         }
 
+		[Command("test")]
+		public async Task TestAsync()
+		{
+			using (HttpClient client = new HttpClient())
+			{
+				var response = client.GetAsync("http://localhost:5000/api/values");
+				if (response.Result.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					var result = response.Result.Content.ReadAsStringAsync();
+					await ReplyAsync(result.Result);
+				}
+				else
+				{
+					await ReplyAsync("You fucked up, Callum.");
+				}
+			}
+			
+		}
+
+
 		[Command("info")]
 		public async Task InfoAsync()
 		{
@@ -51,7 +72,7 @@ namespace DiscordBot.Modules
 		[Summary("Echoes a message.")]
 		public Task SayAsync([Remainder] [Summary("The text to echo")] string echo)
 			=> ReplyAsync(echo);
-	
+
 		//ReplyAsync is a method on ModuleBase
 	}
 
