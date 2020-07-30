@@ -17,6 +17,9 @@ using DiscordBot.Services;
 public class Program
 {
     public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
+
+    public YeetService YeetService {get; set;}
+    
     public async Task MainAsync()
     {
         using (var services = ConfigureServices())
@@ -26,11 +29,11 @@ public class Program
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                client.MessageReceived += YeetAsync;
+                //client.MessageReceived += YeetAsync;
 
                 // Tokens should be considered secret data and never hard-coded.
                 // We can read from the environment variable to avoid hardcoding.
-                await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("token"));
+                await client.LoginAsync(TokenType.Bot, "NjQxNTU3MjA1NTY4NTg1NzM4.XcKHSA.SNlw6KVS6FQHKWqSg-rE_7jxB5U");
                 await client.StartAsync();
 
                 // Here we initialize the logic required to register our commands.
@@ -42,39 +45,10 @@ public class Program
             }
     }
 
-    private Task YeetAsync(SocketMessage messageParam)
-    {
-        
-        Console.WriteLine(messageParam.Author);
-        Console.WriteLine(messageParam.Channel);
-
-        if (messageParam.Author.ToString() == "Gheydragon#9467")
-        {
-            messageParam.Channel.SendMessageAsync("ok boomer");
-        }
-
-        if (messageParam.Author.ToString() == "Gheyface#6401")
-        {
-            messageParam.Channel.SendMessageAsync("Whatever Jordan...");
-        }
-
-        if (messageParam.Author.ToString() == "Gheykaiser#1328")
-        {
-            messageParam.Channel.SendMessageAsync("Cool story Bailey, needs more dragons!");
-        }
-        
-        if (messageParam.Author.ToString() == "Traenacha#3393")
-        {
-            messageParam.Channel.SendMessageAsync("What. A. Cutay hehe");
-        }
-
-        if (messageParam.Author.ToString() == "KrakenMacc#9653")
-        {
-            messageParam.Channel.SendMessageAsync("okay");
-        }
-
-        return Task.CompletedTask;
-    }
+    // private Task YeetAsync(SocketMessage messageParam)
+    // {
+    //     return YeetService.RespondtoUserMessageAsync(messageParam);
+    // }
 
     private Task LogAsync(LogMessage log)
     {
@@ -95,6 +69,7 @@ public class Program
             // Logging
             .AddLogging()
             .AddSingleton<LogService>()
+            .AddSingleton<ToHitService>()
             // Extra
             //.AddSingleton(_config)
             // Add additional services here...

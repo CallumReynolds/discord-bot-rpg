@@ -13,7 +13,7 @@ namespace DiscordBot.Services
         private readonly DiscordSocketClient _discord;
         private readonly CommandService _commands;
         private readonly IServiceProvider _provider;
-
+        
         public CommandHandlingService(IServiceProvider provider, DiscordSocketClient discord, CommandService commands)
         {
             _discord = discord;
@@ -33,6 +33,7 @@ namespace DiscordBot.Services
         {
             // Register modules that are public and inherit ModuleBase<T>.
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _provider);
+
             // Add additional initialization code here...
         }
 
