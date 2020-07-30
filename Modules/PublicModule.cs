@@ -80,7 +80,7 @@ namespace DiscordBot.Modules
 				}
 				else
 				{
-					await ReplyAsync("You fucked up, Callum.");
+					await ReplyAsync("Oh noes!");
 				}
 			}
 			
@@ -90,7 +90,7 @@ namespace DiscordBot.Modules
 		[Command("info")]
 		public async Task InfoAsync()
 		{
-			var msg = $@"Hi {Context.User}! (Tay is sexy hehe)";
+			var msg = $@"Hi {Context.User}!";
 			await ReplyAsync(msg);
 		}
 

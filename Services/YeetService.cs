@@ -21,30 +21,10 @@ namespace DiscordBot.Services
             Console.WriteLine(messageParam.Author);
             Console.WriteLine(messageParam.Channel);
 
-            if (messageParam.Author.ToString() == "Gheydragon#9467")
-            {
-                messageParam.Channel.SendMessageAsync("ok boomer");
-            }
-
-            if (messageParam.Author.ToString() == "Gheyface#6401")
-            {
-                messageParam.Channel.SendMessageAsync("Whatever Jordan...");
-            }
-
-            if (messageParam.Author.ToString() == "Gheykaiser#1328")
-            {
-                messageParam.Channel.SendMessageAsync("Cool story Bailey, needs more dragons!");
-            }
-            
-            if (messageParam.Author.ToString() == "Traenacha#3393")
-            {
-                messageParam.Channel.SendMessageAsync("What. A. Cutay hehe");
-            }
-
-            if (messageParam.Author.ToString() == "KrakenMacc#9653")
-            {
-                messageParam.Channel.SendMessageAsync("okay");
-            }
+            // if (messageParam.Author.ToString() == "Gheydragon#9467")
+            // {
+            //     messageParam.Channel.SendMessageAsync("ok boomer");
+            // }
 
             return Task.CompletedTask;
         }
