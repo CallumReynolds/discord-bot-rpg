@@ -33,13 +33,11 @@ public class Program
 
                 // Tokens should be considered secret data and never hard-coded.
                 // We can read from the environment variable to avoid hardcoding.
-                await client.LoginAsync(TokenType.Bot, "Use Environment Token Here");
+                await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("TOKEN"));
                 await client.StartAsync();
 
                 // Here we initialize the logic required to register our commands.
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
-
-                Console.WriteLine("yeet");
 
                 await Task.Delay(-1);
             }
