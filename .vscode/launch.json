@@ -17,7 +17,6 @@
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
-            //"env": {"token":"NjQxNTU3MjA1NTY4NTg1NzM4.XcKGtQ.mVU2IPibFbXnJfXH0_jxfHLjVX0"}
         },
         {
             "name": ".NET Core Attach",
